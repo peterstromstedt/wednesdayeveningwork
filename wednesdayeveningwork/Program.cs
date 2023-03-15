@@ -1,6 +1,4 @@
-﻿
-
-namespace wednesdayeveningwork
+﻿namespace wednesdayeveningwork
 {
     class Program
     {
