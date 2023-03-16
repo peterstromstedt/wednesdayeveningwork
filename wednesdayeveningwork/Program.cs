@@ -5,14 +5,23 @@
         static void Main(string[] args)
         {
             // Console.WriteLine(TriangleMumboJumbo.TwoSidesAndAngle(3,8,44));
-            TriangleMumboDumbo triangle = new TriangleMumboDumbo(3, 8);
-            Console.WriteLine(triangle.SideTimesBase());
 
-            TriangleAngle angleTriangle = new TriangleAngle(44, 10,3);
-            Console.WriteLine(angleTriangle.TwoSidesAndAngle());
+            //TriangleMumboDumbo triangle = new TriangleMumboDumbo(3, 8);
+            //Console.WriteLine(triangle.SideTimesBase());
 
-            TriangleWithThreeSides threeSides = new TriangleWithThreeSides(5,7,6);
+            //TriangleAngle angleTriangle = new TriangleAngle(44, 10, 3);
+            //Console.WriteLine(angleTriangle.TwoSidesAndAngle());
+
+            TriangleWithThreeSides threeSides = new TriangleWithThreeSides(5, 7, 6);
             Console.WriteLine(threeSides.ThreeSides());
+
+            Console.WriteLine(threeSides.SideC);
+            Console.WriteLine(threeSides.SideB);
+            Console.WriteLine(threeSides.SideA);
+            Console.WriteLine(threeSides.SideTimesBase());           
+
+            //NewTriangle baseTimesHeight = new NewTriangle();
+            //Console.WriteLine(baseTimesHeight.SideTimesBase(2, 5)); 
         }
     }
     /// <summary>
@@ -26,14 +35,14 @@
             return SideA * SideB / 2;
         }
 
-        public static double ThreeSides(double SideA, double SideB, double SideC) 
+        public static double ThreeSides(double SideA, double SideB, double SideC)
         {
             double sum = (SideA + SideB + SideC) / 2;
             return Math.Sqrt(sum * (sum - SideA) * (sum - SideB) * (sum - SideC));
         }
 
         public static double TwoSidesAndAngle(double SideA, double SideB, double angle)
-        {            
+        {
             double angleRadiance = angle * Math.PI / 180;
             return 0.5 * SideA * SideB * Math.Sin(angleRadiance);
         }
@@ -41,12 +50,12 @@
     public class TriangleMumboDumbo
     {
         private double sideA;
-        private double sideB;       
+        private double sideB;
 
         public TriangleMumboDumbo(double a, double b)
         {
             this.sideA = a;
-            this.sideB = b;            
+            this.sideB = b;
         }
 
         public double SideA
@@ -75,28 +84,28 @@
     /// </summary>
     public class TriangleAngle : TriangleMumboDumbo
     {
-        private double angle;     
-        public TriangleAngle(double angle, double a, double b) : base(a,b)
+        private double angle;
+        public TriangleAngle(double angle, double a, double b) : base(a, b)
         {
-            this.angle = angle;           
+            this.angle = angle;
         }
         public double Angle
-        { 
-            get { return angle; } 
+        {
+            get { return angle; }
             set { angle = value; }
         }
         public double TwoSidesAndAngle()
-        {           
-            double angleRadiance = angle * Math.PI / 180;         
+        {
+            double angleRadiance = angle * Math.PI / 180;
             return 0.5 * SideA * SideB * Math.Sin(angleRadiance);
         }
     }
     public class TriangleWithThreeSides : TriangleMumboDumbo
     {
-        private double sideC;     
-        public TriangleWithThreeSides(double c, double a, double b) : base(a,b) 
+        private double sideC;
+        public TriangleWithThreeSides(double c, double a, double b) : base(a, b)
         {
-            this.sideC = c;           
+            this.sideC = c;
         }
         public double SideC
         {
@@ -109,4 +118,21 @@
             return Math.Sqrt(sum * (sum - SideA) * (sum - SideB) * (sum - SideC));
         }
     }
-}
+    public interface Triangle
+    {
+        double SideTripleA { get; set; }
+        double SideTripleB { get; set; }
+
+        double SideTimesBase(double sideTripleA, double sideTripleB);
+    }
+    public class NewTriangle : Triangle
+    {
+        public double SideTripleA { get; set; }
+        public double SideTripleB { get; set; }     
+       
+        public double SideTimesBase(double sideTripleA, double sideTripleB)
+        {
+            return sideTripleA * sideTripleB / 2;
+        }
+    }
+}  
